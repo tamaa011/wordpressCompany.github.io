@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Smart Computing Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/Asset%201@4x.png" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="admin.html"><img style="width: 75px; height: 60px;" src="images/Asset%201@4x.png" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="admin.html"><img src="images/Asset%201@4x.png" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+
+<!--start right dropdown-menu-->
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face44.png" alt="profile"/> <i class="ti-arrow-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1603763804&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d9a34aa0b-466e-96bc-247a-2c895fb0261c&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015" target="_blank">
+                <i class="ti-email text-primary"></i>
+                outlook
+              </a>
+              <a class="dropdown-item" id="logout" href="index.html">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+<!--end right dropdown-menu-->
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="ti-view-list"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_sidebar.html -->
+      
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+      </nav>
+      
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add New Company Invoice</h4>
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <label for="exampleInputName1">Company Name</label>
+                      <input type="text" class="form-control" id="name" placeholder="Company Name" name="CompanyName" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">Invoice Number</label>
+                      <input type="text" class="form-control" id="ha" placeholder="Invoice Number" name="InvoiceNum" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">Price</label>
+                        <input type="email" class="form-control" id="hd" placeholder="Price" name="Price" required >
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleSelectGender">Order</label>
+                        <textarea type="text" class="form-control" id="hp" placeholder="(please mention the quantity between brackets) and write the order. for new item please put (&)" name="Order" rows="6" required></textarea>
+                      </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Order Date</label>
+                        <input type="text" class="form-control" id="hnod" placeholder="Order Date (dd/mm/yyyy)" name="OrderDate">
+                        
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Note</label>
+                        <input type="text" class="form-control" id="hno" placeholder="Note" name="Note">
+                        
+                    </div>
+                    <button type="button" id="submit" value="Send" onclick="upload()" class="btn btn-primary mr-2">Add</button>
+                    <button class=" btn btn-primary mr-2" type="button" disabled style="display: none;" id="loading">
+                      <span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+<script>
+    $(document).ready(function () {
+    var auth = localStorage.getItem("auth");
+
+    if(auth !== "true") {
+        window.location.href = 'index.html';
+    }    
+});
+$(function(){
+  $(".sidebar").load("nav.html");
+});
+    function upload() {
+
+      var CompanyName = $("#name").val();
+      var InvoiceNum = $("#ha").val();
+      var Price = $("#hd").val();
+      var Order = $("#hp").val();
+      var Note = $("#hno").val();
+      var OrderDate = $("#hnod").val();
+
+      let requestBody = {
+        CompanyName: CompanyName,
+        InvoiceNum: InvoiceNum,
+        Price: Price,
+        Order: Order,
+        OrderDate: OrderDate,
+        Note: Note
+
+      }
+          var $CompanyName = $("#name");
+          var $InvoiceNum = $("#ha");
+          var $Price = $("#hd");
+          var $Order = $("#hp");
+          var $OrderDate = $("#hnod");
+          var CompanyName = $CompanyName.val().trim();
+          var InvoiceNum = $InvoiceNum.val().trim();
+          var Price = $Price.val().trim();
+          var Order = $Order.val().trim();
+          var OrderDate = $OrderDate.val().trim();
+        
+          if(CompanyName.length < 1) {
+              alert("Please Fill the Company Name field");
+          }else if (InvoiceNum.length < 1) {
+    alert("Please Fill the Invoice Number field");
+  }else if (Price.length < 1) {
+    alert("Please Fill the Price field");
+  }else if (Order.length < 1) {
+    alert("Please Fill the Order field");
+  }else if (OrderDate.length < 1) {
+    alert("Please Fill the Order Date field");
+  } else {
+              document.getElementById("submit").style.display = "none";
+        document.getElementById("loading").style.display = "inline";  
+      $.ajax({
+        url: "https://immense-temple-88261.herokuapp.com/invoicesCompany",
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+
+        data: requestBody,
+        success: function (data) {
+          alert(data.message);
+            window.location.href = 'AddCompanyInvoice.html'
+          // CallBack(result);
+        },
+      error: function (data) {
+          alert(data.message);
+      }
+      });
+}
+
+    }
+  $("#logout").click(function(){
+    window.localStorage.clear();
+  })
+
+</script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

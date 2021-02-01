@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Smart Computing Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/Asset%201@4x.png" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="admin.html"><img style="width: 75px; height: 60px;" src="images/Asset%201@4x.png" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="admin.html"><img src="images/Asset%201@4x.png" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+
+<!--start right dropdown-menu-->
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face44.png" alt="profile"/> <i class="ti-arrow-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1603763804&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d9a34aa0b-466e-96bc-247a-2c895fb0261c&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015" target="_blank">
+                <i class="ti-email text-primary"></i>
+                outlook
+              </a>
+              <a class="dropdown-item" id="logout" href="index.html">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+<!--end right dropdown-menu-->
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="ti-view-list"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_sidebar.html -->
+      
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+      </nav>
+      
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add New User</h4>
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <label for="exampleInputName1">User Name</label>
+                      <input type="text" class="form-control" id="UserName" placeholder="User Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">E-mail</label>
+                      <input type="email" class="form-control" id="UserEmail" placeholder="E-mail" name="email" required>
+                    </div>
+                        <!--category-->
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">Password</label>
+                        <input type="password" class="form-control" id="UserPassword" placeholder="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleSelectGender">RE-Password</label>
+                        <input onkeyup="isPasswordMatch();" class="form-control" type="password" id="RE-Password" placeholder="password" name="REPassword">
+                        <div id="message">
+                          <h3>Password must contain the following:</h3>
+                          <p id="length" class="invalid">Minimum <b>6 characters</b></p>
+                        </div>
+              <label for="exampleInputName1"><p style=" margin-top: 8px;">Show Password</p></label>
+
+              <input type="checkbox" onclick="myFunction()" style=" margin-top: 11px;">
+              <div id="divCheckPassword"></div>
+                      </div>
+                    <button type="button" onclick="AddNewAdmin()"  class="btn btn-primary mr-2" id="lo">Add</button>
+                    <button class=" btn btn-primary mr-2" type="button" disabled style="display: none;" id="loading">
+                      <span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script>
+      $(document).ready(function () {
+var auth = localStorage.getItem("auth");
+    if(auth !== "true") {
+        window.location.href = 'index.html';
+    }  
+});
+function AddNewAdmin(){
+        document.getElementById("lo").style.display = "none";
+        document.getElementById("loading").style.display = "inline";
+            document.getElementById("lo").style.display = "inline";
+        document.getElementById("loading").style.display = "none";
+          var $Email = $("#UserEmail");
+          var $name = $("#UserName");
+          var $password = $("#UserPassword");
+          var email = $Email.val().trim();
+          var name = $name.val().trim();
+          var password = $password.val().trim();
+          if(name.length < 1) {
+              setTimeout(function(){ alert("Please Fill the Name field"); }, 200);
+          }else if (email.length < 1) {
+              setTimeout(function(){ alert("Please Fill the Email field"); }, 200);
+  }else if (password.length < 1){
+        setTimeout(function(){ alert("Please Fill the Password field"); }, 200);
+    } else {
+      
+    $.ajax({
+    url: "https://immense-temple-88261.herokuapp.com/user/signup",
+    method: "POST",
+    data: {
+      email: $("#UserEmail").val(),
+      name : $("#UserName").val(),
+      password : $("#UserPassword").val(),
+    },
+    beforeSend: function (xhr) {
+      /* Authorization header */
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    },
+    success: function (data) {
+     console.log("addedd Successfully");
+    },
+      success: function (data) {
+        alert("add Successfully");
+          window.location.href = 'AddUser.html'
+      },
+      error: function (data) {
+          alert("mail exists");
+
+      }
+  });
+  }
+    }
+function isPasswordMatch() {
+    var password = $("#UserPassword").val();
+    var confirmPassword = $("#RE-Password").val();
+
+    if (password != confirmPassword) { $("#divCheckPassword").html("Passwords do not match!");
+                                      
+                                     }
+    else {$("#divCheckPassword").html("Passwords match.");
+        
+         }
+}
+    function myFunction() {
+         var x = document.getElementById("UserPassword");
+        var y = document.getElementById("RE-Password");
+  if (x.type === "password" && y.type === "password" ) {
+    x.type = "text";
+      y.type = "text";
+  } else {
+    x.type = "password";
+      y.type = "password";
+  }
+}
+var myInput = document.getElementById("UserPassword");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+
+  // Validate length
+  if(myInput.value.length >= 6) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+  $("#logout").click(function(){
+    window.localStorage.clear();
+  });
+                $(function(){
+  $(".sidebar").load("nav.html");
+});
+
+    </script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
